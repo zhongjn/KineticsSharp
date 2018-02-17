@@ -66,7 +66,7 @@ public struct Vector
         };
     }
 
-    public double L2
+    public double LSqr
     {
         get
         {
@@ -77,7 +77,7 @@ public struct Vector
     {
         get
         {
-            return Math.Sqrt(L2);
+            return Math.Sqrt(LSqr);
         }
     }
     public Vector(double x, double y)

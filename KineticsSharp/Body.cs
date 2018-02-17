@@ -58,7 +58,6 @@ namespace KineticsSharp
             Vector m0 = margin[0];
             for (int i = 0; i < margin.Length; i++)
             {
-                //margin[i] += new Vector(100, 100);
                 margin[i] -= m0;
             }
 
@@ -82,15 +81,15 @@ namespace KineticsSharp
                 // compute moment of inertia (based on m0)
                 // see http://www.doc88.com/p-242584373942.html
                 double currentMass = currentArea * density;
-                double a_Sqr = margin[i].L2;
-                double b_Sqr = margin[i_next].L2;
-                double c_Sqr = (margin[i] - margin[i_next]).L2;
+                double a_Sqr = margin[i].LSqr;
+                double b_Sqr = margin[i_next].LSqr;
+                double c_Sqr = (margin[i] - margin[i_next]).LSqr;
                 momentOfInertia += ((a_Sqr + b_Sqr + c_Sqr) / 36.0 +
-                                      currentCenter.L2) * currentMass; // parallel axis theorem
+                                      currentCenter.LSqr) * currentMass; // parallel axis theorem
             }
             mass = density * area;
             center = areaWeightedCenter / area;
-            momentOfInertia -= (center - margin[0]).L2 * mass; // parallel axis theorem
+            momentOfInertia -= (center - margin[0]).LSqr * mass; // parallel axis theorem
 
             // base on center
             for (int i = 0; i < margin.Length; i++)
